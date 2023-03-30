@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Image, Text, Keyboard, TouchableWithoutFeedback, RefreshControl, SafeAreaView, ScrollView } from 'react-native';
+import { View, Image, Text, Keyboard, TouchableWithoutFeedback, Linking, RefreshControl, SafeAreaView, ScrollView } from 'react-native';
 import { db } from "../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from 'expo-font';
@@ -82,7 +82,10 @@ const SongDisplayScreen = ({ route, navigation }) => {
                   <Image style={songDisplayStyles.songImage} source={{ uri: image }} />
                </View>
                <View style={songDisplayStyles.songInfoView}>
-                  <Text style={songDisplayStyles.songTitleText}>{title}</Text>
+                  <Text style={songDisplayStyles.songTitleText} 
+                     onPress={() => {Linking.openURL(trackLink)}}>
+                     {title}
+                  </Text>
                   <Text style={songDisplayStyles.albumText}>{album}</Text>
                   <Text style={songDisplayStyles.songArtistsText}>{artists}</Text>
                </View>
