@@ -28,15 +28,15 @@ const Input = ({ name, control }) => {
 
 const HomeScreen = ({ navigation }) => {
    const { control, handleSubmit } = useForm();
-   //const [code, setCode] = useState("000");
 
    const onSubmit = (data) => {
       const codeInput = data["code"];
+      //TODO: handle code input with Firebase
       const arr = ["012", "1234", "234", "456"];
       let redo = true;
       for (let val of arr) {
          if (val === codeInput) {
-            Alert.alert("Code entered: " + codeInput, "YUH", [
+            Alert.alert("Code entered: " + codeInput, "Onward.", [
                {
                   text: "OK",
                   onPress: () => console.log("'OK' Pressed"),

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Image, Text, Keyboard, TouchableWithoutFeedback, Linking, RefreshControl, SafeAreaView, ScrollView } from 'react-native';
+import { View, Image, Text, Keyboard, TouchableWithoutFeedback, Linking } from 'react-native';
 import { db } from "../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from 'expo-font';
@@ -22,11 +22,8 @@ const SongDisplayScreen = ({ route, navigation }) => {
    const [title, setTitle] = useState("");
    const [trackLink, setTrackLink] = useState("");
    const [uid, setUid] = useState("");
-   const [loading, setLoading] = useState(null);
-   const [refreshing, setRefreshing] = useState(false);
 
    const setTrackInfoFromFirestore = async (uid) => {
-      console.log('CALLING SETTRACKINFOFROMFIRESTORE().')
       const trackRef = doc(db, "current-track", uid);
       const snapshot = await getDoc(trackRef)
          .then((snapshot) => {
@@ -54,7 +51,6 @@ const SongDisplayScreen = ({ route, navigation }) => {
          .then((snapshot) => {
             const data = snapshot.data();
             const content = JSON.parse(JSON.stringify(data));
-            console.log(content);
             setUid(content.user_id);
             setTrackInfoFromFirestore(content.user_id);
          })
