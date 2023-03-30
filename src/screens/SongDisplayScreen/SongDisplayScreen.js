@@ -39,7 +39,11 @@ const SongDisplayScreen = ({ route, navigation }) => {
             setArtists(arts);
             setImage(track.image);
             setTimeLeft(track.time_left);
-            setTitle(track.name);
+            if (track.name.length <= 56) 
+               setTitle(track.name);
+            else 
+               setTitle(track.name.substring(0, 52) + '...');
+            // setTitle(track.name);
             setTrackLink(track.link);
             setLoading(true);
          })
