@@ -16,3 +16,4 @@ copy_pasta.txt
 src/.env
 GoogleService-Info.plist
 notes.txt
+src/firebase/config.js

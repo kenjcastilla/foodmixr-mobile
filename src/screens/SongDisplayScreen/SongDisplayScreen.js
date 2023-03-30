@@ -68,16 +68,6 @@ const SongDisplayScreen = ({ route, navigation }) => {
       console.log(`UID: ${uid}`);
    }
 
-   // const onRefresh = React.useCallback(() => {
-   //    console.log(`Current track: ${title} by ${artists} from ${album}`);
-   //    setRefreshing(true);
-   //    setTrackInfoFromFirestore();
-   //    setTimeout(() => {
-   //       setRefreshing(false);
-   //    }, 3000);
-   //    console.log(`Current track: ${title} by ${artists} from ${album}`)
-   // }, []);
-
    useEffect(() => {
       setTrackInfoFromFirestore();
       // console.log(timeLeft);
@@ -89,12 +79,6 @@ const SongDisplayScreen = ({ route, navigation }) => {
 
    return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-         {/* <SafeAreaView style={styles.songView}>
-         <ScrollView
-            contentContainerStyle={styles.scrollView}
-            refreshControl={
-               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }> */}
          <View style={styles.songView}>
             <View style={styles.songLogoView}>
                <Text style={styles.songLogoText}>foodmixr</Text>
@@ -109,8 +93,6 @@ const SongDisplayScreen = ({ route, navigation }) => {
             </View>
             <StatusBar style="auto" />
          </View>
-         {/* </ScrollView>
-      </SafeAreaView> */}
       </TouchableWithoutFeedback>
    );
 }
