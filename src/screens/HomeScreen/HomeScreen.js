@@ -6,9 +6,7 @@ import { db } from "../../firebase/config";
 import { getDoc } from "firebase/firestore";
 import { Button } from "@rneui/themed";
 import { useFonts } from "expo-font";
-import { styles } from "../../Style";
-//import { useContext } from "react";
-//export const CodeContext = React.createContext();
+import { homeStyles } from "../../Style";
 
 const Input = ({ name, control }) => {
    const { field } = useController({
@@ -23,7 +21,7 @@ const Input = ({ name, control }) => {
          placeholder="0000"
          keyboardType="number-pad"
          maxLength={4}
-         style={styles.homeInput}
+         style={homeStyles.homeInput}
       />
    );
 };
@@ -71,11 +69,11 @@ const HomeScreen = ({ navigation }) => {
 
    return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-         <View style={styles.homeView}>
-            <View style={styles.homeLogoView}>
-               <Text style={styles.homeLogoText}>foodmixr</Text>
+         <View style={homeStyles.homeView}>
+            <View style={homeStyles.homeLogoView}>
+               <Text style={homeStyles.homeLogoText}>foodmixr</Text>
             </View>
-            <Text style={styles.homeText}>Enter the code below:</Text>
+            <Text style={homeStyles.homeText}>Enter the code below:</Text>
             <StatusBar style="auto" />
             <Input name="code" control={control} />
             <Button title="Submit"

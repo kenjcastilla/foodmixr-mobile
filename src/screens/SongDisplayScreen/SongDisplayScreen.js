@@ -4,12 +4,11 @@ import { View, Image, Text, Keyboard, TouchableWithoutFeedback, RefreshControl, 
 import { db } from "../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from 'expo-font';
-import { styles } from '../../Style';
+import { songDisplayStyles } from '../../Style';
 
 
 const SongDisplayScreen = ({ route, navigation }) => {
    const { code } = route.params;
-   // const code = '1234';
    console.log(code);
    const [loaded] = useFonts({
       JosefinSansBold: require("../../../assets/fonts/JosefinSans-Bold.ttf"),
@@ -43,12 +42,10 @@ const SongDisplayScreen = ({ route, navigation }) => {
                setTitle(track.name);
             else 
                setTitle(track.name.substring(0, 52) + '...');
-            // setTitle(track.name);
             setTrackLink(track.link);
             setLoading(true);
          })
          .catch((error) => { console.log(error) });
-      // setLoading(false);
    };
 
    const userRef = doc(db, "users", code);
@@ -74,25 +71,20 @@ const SongDisplayScreen = ({ route, navigation }) => {
 
    useEffect(() => {
       setTrackInfoFromFirestore();
-      // console.log(timeLeft);
-      // setInterval(() => {
-      //    setTrackInfoFromFirestore();
-      // }, 70000);
-
    }, []);
 
    return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-         <View style={styles.songView}>
-            <View style={styles.songLogoView}>
-               <Text style={styles.songLogoText}>foodmixr</Text>
-               <View style={styles.songImageFrame}>
-                  <Image style={styles.songImage} source={{ uri: image }} />
+         <View style={songDisplayStyles.songView}>
+            <View style={songDisplayStyles.songLogoView}>
+               <Text style={songDisplayStyles.songLogoText}>foodmixr</Text>
+               <View style={songDisplayStyles.songImageFrame}>
+                  <Image style={songDisplayStyles.songImage} source={{ uri: image }} />
                </View>
-               <View style={styles.songInfoView}>
-                  <Text style={styles.songTitleText}>{title}</Text>
-                  <Text style={styles.albumText}>{album}</Text>
-                  <Text style={styles.songArtistsText}>{artists}</Text>
+               <View style={songDisplayStyles.songInfoView}>
+                  <Text style={songDisplayStyles.songTitleText}>{title}</Text>
+                  <Text style={songDisplayStyles.albumText}>{album}</Text>
+                  <Text style={songDisplayStyles.songArtistsText}>{artists}</Text>
                </View>
             </View>
             <StatusBar style="auto" />

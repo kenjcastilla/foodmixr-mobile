@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const homeStyles = StyleSheet.create({
   homeView: {
     flex: 1,
     flexDirection: 'column',
@@ -30,7 +30,10 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     fontSize: 50,
   },
+});
 
+
+const songDisplayStyles = StyleSheet.create({
   songView: {
     flex: 1,
     flexDirection: 'column',
@@ -71,7 +74,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-
   songTitleText: {
     textAlign: 'center',
     fontFamily: 'JosefinSansBold',
@@ -93,7 +95,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: 400
   },
-  
 });
 
-export { styles };
+export { homeStyles, songDisplayStyles };
