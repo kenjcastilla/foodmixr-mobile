@@ -32,12 +32,15 @@ const SongDisplayScreen = ({ route, navigation }) => {
             console.log(track);
             setAlbum(track.album);
             const arts = track.artists.join(", ");
-            setArtists(arts);
+            if (arts.length <= 205)
+               setArtists(arts);
+            else
+               setArtists(arts.substring(0, 201) + '...');
             setImage(track.image);
             setTimeLeft(track.time_left);
-            if (track.name.length <= 56) 
+            if (track.name.length <= 56)
                setTitle(track.name);
-            else 
+            else
                setTitle(track.name.substring(0, 52) + '...');
             setTrackLink(track.link);
             setLoading(true);
@@ -78,8 +81,8 @@ const SongDisplayScreen = ({ route, navigation }) => {
                   <Image style={songDisplayStyles.songImage} source={{ uri: image }} />
                </View>
                <View style={songDisplayStyles.songInfoView}>
-                  <Text style={songDisplayStyles.songTitleText} 
-                     onPress={() => {Linking.openURL(trackLink)}}>
+                  <Text style={songDisplayStyles.songTitleText}
+                     onPress={() => { Linking.openURL(trackLink) }}>
                      {title}
                   </Text>
                   <Text style={songDisplayStyles.albumText}>{album}</Text>
