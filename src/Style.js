@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   songImageFrame: {
     backgroundColor: 'lightyellow',
     borderColor: 'black',
+    width: 'auto'
   },
   songImage: {
     backgroundColor: 'white',
@@ -77,20 +78,20 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 35,
     marginBottom: 15,
-    width: '80%',
+    width: 400,
   },
   albumText: {
     fontFamily: 'JosefinSansBold',
     fontSize: 20,
     textAlign: 'center',
     marginBottom: 15,
-    width: '80%'
+    width: 400
   },
   songArtistsText: {
     fontFamily: 'JosefinSansMedium',
     fontSize: 20,
     textAlign: 'center',
-    width: '80%'
+    width: 400
   },
   
 });
