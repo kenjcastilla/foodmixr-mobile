@@ -34,6 +34,13 @@ const homeStyles = StyleSheet.create({
 
 
 const songDisplayStyles = StyleSheet.create({
+  overallView: {
+    flex: 1,
+    backgroundColor: 'lightyellow',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   songView: {
     flex: 1,
     flexDirection: 'column',
