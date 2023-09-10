@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Image, Text, Keyboard, TouchableWithoutFeedback, Linking } from 'react-native';
+import { View, Image, Text, Keyboard, TouchableWithoutFeedback, Linking, RefreshControl, ScrollView } from 'react-native';
 import { db } from "../../firebase/config";
 import { doc, getDoc } from "firebase/firestore";
 import { useFonts } from 'expo-font';
 import { songDisplayStyles } from '../../Style';
-
 
 const SongDisplayScreen = ({ route, navigation }) => {
    const { code } = route.params;
@@ -22,6 +21,17 @@ const SongDisplayScreen = ({ route, navigation }) => {
    const [title, setTitle] = useState("");
    const [trackLink, setTrackLink] = useState("");
    const [uid, setUid] = useState("");
+   const [refreshing, setRefreshing] = useState(false);
+
+   const wait = (timeout) => {
+      return new Promise(resolve => setTimeout(resolve, timeout));
+   }
+
+   const onRefresh = useCallback(() => {
+      setRefreshing(true);
+      setTrackInfoFromFirestore(uid);
+      wait(2000).then(() => { setRefreshing(false) })
+   });
 
    const setTrackInfoFromFirestore = async (uid) => {
       const trackRef = doc(db, "current-track", uid);
@@ -43,7 +53,6 @@ const SongDisplayScreen = ({ route, navigation }) => {
             else
                setTitle(track.name.substring(0, 52) + '...');
             setTrackLink(track.link);
-            setLoading(true);
          })
          .catch((error) => { console.log(error) });
    };
@@ -73,25 +82,38 @@ const SongDisplayScreen = ({ route, navigation }) => {
    }, []);
 
    return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-         <View style={songDisplayStyles.songView}>
-            <View style={songDisplayStyles.songLogoView}>
-               <Text style={songDisplayStyles.songLogoText}>foodmixr</Text>
-               <View style={songDisplayStyles.songImageFrame}>
-                  <Image style={songDisplayStyles.songImage} source={{ uri: image }} />
+      <View style={songDisplayStyles.overallView}>
+
+         <ScrollView contentContainerStyle={songDisplayStyles.scrollView} refreshControl={
+            <RefreshControl
+               refreshing={refreshing}
+               onRefresh={onRefresh}
+               title='calm down im gettin ur music'
+               progressBackgroundColor={'lightyellow'} />
+         }
+         >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+               <View style={songDisplayStyles.songView}>
+                  <View style={songDisplayStyles.songLogoView}>
+                     <Text style={songDisplayStyles.songLogoText}>foodmixr</Text>
+                     <View style={songDisplayStyles.songImageFrame}>
+                        <Image style={songDisplayStyles.songImage} source={{ uri: image }} />
+                     </View>
+                     <View style={songDisplayStyles.songInfoView}>
+                        <Text style={songDisplayStyles.songTitleText}
+                           onPress={() => { Linking.openURL(trackLink) }}>
+                           {title}
+                        </Text>
+                        <Text style={songDisplayStyles.albumText}>{album}</Text>
+                        <Text style={songDisplayStyles.songArtistsText}>{artists}</Text>
+                     </View>
+                  </View>
+                  <StatusBar style="auto" />
                </View>
-               <View style={songDisplayStyles.songInfoView}>
-                  <Text style={songDisplayStyles.songTitleText}
-                     onPress={() => { Linking.openURL(trackLink) }}>
-                     {title}
-                  </Text>
-                  <Text style={songDisplayStyles.albumText}>{album}</Text>
-                  <Text style={songDisplayStyles.songArtistsText}>{artists}</Text>
-               </View>
-            </View>
-            <StatusBar style="auto" />
-         </View>
-      </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback>
+         </ScrollView>
+
+      </View>
    );
 }
 
