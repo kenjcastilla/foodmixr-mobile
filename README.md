@@ -8,7 +8,7 @@ You hang your head in defeat, accepting that you may never hear that song again.
 Foodmixr is an application that allows customers and others to see what song is being played at a given establishment without the need for audio capture. All the establishment has to do is sign up with [Foodmixr Web](https://github.com/kenjcastilla/foodmixr-web), and then clients with the Foodmixr Mobile application can see what is being played in real time. The struggle to find out what beauty is being played
 behind all of that commotion ends here.
 
-[*VIDEO DEMO*](https://youtu.be/rx80sT9B9kE)
+[*VIDEO DEMO*](https://youtu.be/4TC5o5zKR70)
 
 
 *Everything below is from Create-React-App.*
